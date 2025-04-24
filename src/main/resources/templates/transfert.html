@@ -15,5 +15,38 @@
         <div class="links">Se déconnecter</div>
     </div>
 </div>
+<div class="form-section">
+    <select id="relations" name="relations" value="Sélectionner une relation" class="input">
+        <option value="relation_1">Relation1</option>
+        <option value="relation_2">Relation2</option>
+    </select>
+    <input type="text" placeholder="Description" class="input-description input">
+    <input type="number" placeholder="0€" id="quantity" name="quantity" min="0" max="1000" step="1" value="0" class="input">
+    <button id="btn-validate">Payer</button>
+</div>
+<div class="transactions-section">
+    <div class="transactions-title-head">Mes Transations</div>
+    <div class="transactions-title-container">
+        <div class="transactions-title-head">Relations</div>
+        <div class="transactions-title-head">Description</div>
+        <div class="transactions-title-right">Montant</div>
+    </div>
+    <div class="transactions-rows-container">
+        <div class="transactions-row-head">Laure-Anne</div>
+        <div class="transactions-row-head">Restaurant</div>
+        <div class="transactions-row-right">10€</div>
+    </div>
+    <div class="transactions-rows-container">
+        <div class="transactions-row-head">Clara</div>
+        <div class="transactions-row-head">Voyage</div>
+        <div class="transactions-row-right">25€</div>
+    </div>
+    <div class="transactions-rows-container">
+        <div class="transactions-row-head">Luc</div>
+        <div class="transactions-row-head">Billets de cinéma</div>
+        <div class="transactions-row-right">8€</div>
+    </div>
+</div>
+
 </body>
 </html>
