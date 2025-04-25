@@ -10,22 +10,38 @@ body {
     font-family: helvetica;
 }
 .header-container {
-    width: 100%;
+    width: 90vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 20px 0 60px 0;
+    position: fixed;
+    top:0;
 }
+
+#nav-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+ }
 .link-logo {
 width: 50%;
 }
 
 .links-container {
-    width: 50%;
+    width: 100%;
     display:flex;
     justify-content: space-between;
     align-items: center;
+    list-style-type: none;
 }
+.links-container a {
+    text-decoration: none;
+}
+
+
+
+
 
 .form-section {
     width: 100%;
@@ -59,7 +75,7 @@ width: 50%;
 .transactions-section {
     width: 88vw;
     display: flex;
-    justify-content: center;
+
     flex-direction: column;
     height: 300px;
     border:1px solid lightgrey;

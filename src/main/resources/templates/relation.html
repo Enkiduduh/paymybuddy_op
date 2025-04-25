@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/relation.css}"/>
 </head>
 <body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div class="form-section">
+    <div class="relations-wrapper">
+        <div class="text-relation">Chercher une relation</div>
+        <input type="text" placeholder="Saisir une adresse mail" id="input-add-relation">
+    </div>
+    <button id="btn-validate">Ajouter</button>
+</div>
 
 </body>
 </html>
