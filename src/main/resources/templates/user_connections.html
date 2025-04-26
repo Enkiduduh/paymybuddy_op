@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Connexions</title>
+</head>
+<body>
+
+<h1>Liste des Connexions</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>User ID</th>
+        <th>Connection ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="connection : ${connections}">
+        <td th:text="${connection.userId}"></td>
+        <td th:text="${connection.connectionId}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

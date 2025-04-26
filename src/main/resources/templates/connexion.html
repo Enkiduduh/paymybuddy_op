@@ -6,11 +6,18 @@
     <link rel="stylesheet" th:href="@{/css/connexion.css}"/>
 </head>
 <body>
-<div class="main-container">
-    <button class="button btn-buddy" >Pay My Buddy</button>
-    <input type="text" placeholder="Mail" class="input-connexion">
-    <input type="text" placeholder="Mot de passe" class="input-connexion">
-    <button class="button btn-validate" >Se connecter</button>
+
+<form class="main-container" th:action="@{/connexion}" method="post">
+    <button class="button btn-buddy">Pay My Buddy</button>
+    <input type="text" placeholder="Mail" name="username" class="input-connexion">
+    <input type="password" placeholder="Mot de passe" name="password" class="input-connexion">
+    <button class="button btn-validate" type="submit">Se connecter</button>
+</form>
+
+<!-- Afficher un message d'erreur si échec -->
+<div th:if="${param.error}">
+    <p style="color: red;">Couple mail / mot de passe incorrect.</p>
 </div>
+
 </body>
 </html>
