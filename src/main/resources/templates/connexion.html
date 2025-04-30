@@ -9,8 +9,8 @@
 
 <form class="main-container" th:action="@{/connexion}" method="post">
     <button class="button btn-buddy">Pay My Buddy</button>
-    <input type="text" placeholder="Mail" name="username" class="input-connexion">
-    <input type="password" placeholder="Mot de passe" name="password" class="input-connexion">
+    <input type="text" placeholder="Mail" name="username" class="input-connexion" required>
+    <input type="password" placeholder="Mot de passe" name="password" class="input-connexion" required>
     <button class="button btn-validate" type="submit">Se connecter</button>
 </form>
 

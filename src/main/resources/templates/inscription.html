@@ -6,12 +6,17 @@
     <link rel="stylesheet" th:href="@{/css/inscription.css}"/>
 </head>
 <body>
-<div class="main-container">
+<form th:action="@{/connexion}" method="post" class="main-container">
     <button class="button btn-buddy" >Pay My Buddy</button>
-    <input type="text" placeholder="Username" class="input-inscription">
-    <input type="text" placeholder="Mail" class="input-inscription">
-    <input type="text" placeholder="Mot de passe" class="input-inscription">
-    <button class="button btn-validate" >S'inscrire</button>
-</div>
+    <input type="text" name="username" placeholder="username" required class="input-inscription" />
+    <input type="email" name="email" placeholder="email" required  class="input-inscription"/>
+    <input type="password" name="password" placeholder="mot de passe" required class="input-inscription" />
+    <button class="button btn-validate" type="submit" >S'inscrire</button>
+    <div th:if="${param.error}">Email ou mot de passe invalide</div>
+</form>
 </body>
 </html>
+
+
+
+
