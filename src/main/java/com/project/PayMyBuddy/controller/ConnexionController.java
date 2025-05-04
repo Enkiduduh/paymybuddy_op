@@ -10,4 +10,6 @@ public class ConnexionController {
     public String afficherConnexion() {
         return "connexion"; // correspond à templates/connexion.html
     }
+
+
 }
