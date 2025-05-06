@@ -1,6 +1,8 @@
 package com.project.PayMyBuddy.controller;
 
 import com.project.PayMyBuddy.service.InscriptionService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,11 @@ public class InscriptionController {
     }
 
     @GetMapping("/inscription")
-    public String afficherInscription() {
+    public String afficherInscription(Authentication auth) {
+        if ((auth != null) && auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken)) {
+            return "redirect:/transfert"; // renvoie si déjà connecté sur la page /transfert.html
+        }
         return "inscription"; // correspond à templates/inscription.html
     }
 
