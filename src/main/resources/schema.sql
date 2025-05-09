@@ -7,12 +7,12 @@ CREATE TABLE IF NOT EXISTS User (
 
 CREATE TABLE IF NOT EXISTS Transaction (
     id INT PRIMARY KEY,
-    senderID INT NOT NULL,
-    receiverID INT NOT NULL,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
     description VARCHAR(100),
     amount DOUBLE,
-    FOREIGN KEY (senderID) REFERENCES User(id),
-    FOREIGN KEY (receiverID) REFERENCES User(id)
+    FOREIGN KEY (sender_id) REFERENCES User(id),
+    FOREIGN KEY (receiver_id) REFERENCES User(id)
 );
 
 CREATE TABLE IF NOT EXISTS UserConnection (

@@ -12,6 +12,11 @@
     <input type="text" placeholder="Mail" name="username" class="input-connexion" required>
     <input type="password" placeholder="Mot de passe" name="password" class="input-connexion" required>
     <button class="button btn-validate" type="submit">Se connecter</button>
+    <button class="button btn-inscription" type="button"
+            th:onclick="|window.location='@{/inscription}'|">
+        S'inscrire
+    </button>
+
 </form>
 
 <!-- Afficher un message d'erreur si échec -->

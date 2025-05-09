@@ -56,7 +56,7 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/deconnexion")
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/connexion?logout")
                         .permitAll()
                 );
