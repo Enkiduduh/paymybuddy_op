@@ -7,32 +7,31 @@
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu}"></div>
-<div class="form-section">
-    <select id="relations" name="relations" value="Sélectionner une relation" class="input">
-        <option value="relation_1">Relation1</option>
-        <option value="relation_2">Relation2</option>
-    </select>
-    <input type="text" placeholder="Description" class="input-description input">
-    <input type="number" placeholder="0€" id="quantity" name="quantity" min="0" max="1000" step="1" value="0"
-           class="input">
-    <button id="btn-validate">Payer</button>
-</div>
+
+
+    <form th:action="@{/transfert}" method="post" class="form-section">
+        <!-- on peut garder user.id en hidden si besoin -->
+        <input type="hidden" name="userId" th:value="${user.id}" />
+
+        <select name="connectionId" class="input">
+            <option value="" disabled selected>– Sélectionner une relation –</option>
+            <option th:each="uc : ${relations}"
+                    th:value="${uc.connection.id}"
+                    th:text="${uc.connection.username}">
+            </option>
+        </select>
+        <input type="text" placeholder="Description" name="description" class="input-description input"/>
+        <input type="number" placeholder="0€" id="quantity" name="amount"
+               min="0" max="1000" step="1" value="0" class="input"/>
+        <button id="btn-validate" type="submit">Payer</button>
+    </form>
+
 <div class="transactions-section">
     <div class="transactions-title-head">Mes Transations</div>
     <div class="transactions-title-container">
         <div class="transactions-title-head">Relations</div>
         <div class="transactions-title-head">Description</div>
         <div class="transactions-title-right">Montant</div>
-    </div>
-    <div class="transactions-rows-container">
-        <div class="transactions-row-head">Laure-Anne</div>
-        <div class="transactions-row-head">Restaurant</div>
-        <div class="transactions-row-right">10€</div>
-    </div>
-    <div class="transactions-rows-container">
-        <div class="transactions-row-head">Clara</div>
-        <div class="transactions-row-head">Voyage</div>
-        <div class="transactions-row-right">25€</div>
     </div>
     <div class="transactions-rows-container">
         <div class="transactions-row-head">Luc</div>

@@ -9,12 +9,14 @@ import lombok.Data;
 public class UserConnection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="uc_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "connection_id")
-    private Long connectionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "connection_id")
+    private User connection;
 }

@@ -19,7 +19,6 @@ public class Transaction {
     @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
-
     private String description;
     private Double amount;
 }

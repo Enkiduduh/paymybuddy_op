@@ -4,7 +4,6 @@ package com.project.PayMyBuddy.controller;
 import org.springframework.ui.Model;
 import com.project.PayMyBuddy.model.User;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
