@@ -1,6 +1,8 @@
 package com.project.PayMyBuddy.controller;
 
+import com.project.PayMyBuddy.model.Transaction;
 import com.project.PayMyBuddy.model.UserConnection;
+import com.project.PayMyBuddy.service.TransactionService;
 import com.project.PayMyBuddy.service.TransfertService;
 import jakarta.transaction.Transactional;
 import org.springframework.ui.Model;
@@ -17,9 +19,11 @@ import java.util.List;
 public class TransfertController {
 
     private final TransfertService transfertService;
+    private final TransactionService transactionService;
 
-    public TransfertController(TransfertService transfertService) {
+    public TransfertController(TransfertService transfertService, TransactionService transactionService) {
         this.transfertService = transfertService;
+        this.transactionService = transactionService;
     }
 
     @GetMapping("/transfert")
@@ -32,22 +36,27 @@ public class TransfertController {
         List<UserConnection> relations =
                 transfertService.findByUserId(currentUser.getId());
 
-        // 3. Ajoute user + relations au modèle
+        // 3. Charge ses transactions (Transaction)
+        List<Transaction> transactions =
+                transactionService.findBySenderId(currentUser.getId());
+
+        // 4. Ajoute user + relations + transactions au modèle
         model.addAttribute("user", currentUser);
         model.addAttribute("relations", relations);
+        model.addAttribute("transactions", transactions);
 
         return "transfert"; // correspond à templates/transfert.html
     }
 
-//    @PostMapping("/envoyerTransfert")
-//    public String envoyerTransfert(
-//            @RequestParam Long connectionId,
-//            @RequestParam String description,
-//            @RequestParam Double amount,
-//            Authentication auth) {
-//
-//        User from = (User) auth.getPrincipal();
-//        transfertService.executeTransfer(from.getId(), connectionId, description, amount);
-//        return "redirect:/transfert?success";
-//    }
+    @PostMapping("/transfert")
+    public String envoyerTransfert(
+            @RequestParam Long connectionId,
+            @RequestParam String description,
+            @RequestParam Double amount,
+            Authentication auth) {
+
+        User from = (User) auth.getPrincipal();
+        transfertService.executeTransfert(from.getId(), connectionId, description, amount);
+        return "redirect:/transfert?success";
+    }
 }
