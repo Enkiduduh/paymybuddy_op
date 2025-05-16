@@ -52,10 +52,10 @@ public class TransfertService {
         Transaction trans = new Transaction();
         trans.setSender(sender);
         trans.setReceiver(receiver);
+        trans.setDescription(description);
         trans.setAmount(amount);
 
-        //3. Sauvegarer l'objet trans crée
+        //3. Sauvegarder l'objet trans crée
         transactionRepository.save(trans);
     }
-
 }

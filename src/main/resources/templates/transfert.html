@@ -36,7 +36,7 @@
     <div th:each="trans : ${transactions}" class="transactions-rows-container">
         <div th:text="${trans.receiver.username}" class="transactions-row-head"></div>
         <div th:text="${trans.description}" class="transactions-row-head"></div>
-        <div th:text="${trans.amount}" class="transactions-row-right"></div>
+        <div th:text="${trans.amount}" class="transactions-row-right">€</div>
     </div>
 </div>
 

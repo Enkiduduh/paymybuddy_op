@@ -7,12 +7,23 @@
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu}"></div>
-<div class="form-section">
+<form class="form-section" th:action="@{/relation}" method="post">
+    <!-- on peut garder user.id en hidden si besoin -->
+    <input type="hidden" name="userId" th:value="${user.id}"/>
+
     <div class="relations-wrapper">
         <div class="text-relation">Chercher une relation</div>
-        <input type="text" placeholder="Saisir une adresse mail" id="input-add-relation">
+        <input type="text" placeholder="Saisir une adresse mail" name="email" id="input-add-relation"/>
     </div>
     <button id="btn-validate">Ajouter</button>
+</form>
+<!-- Afficher un message de succès si réussite -->
+<div th:if="${param.success}">
+    <p style="color: green;">L'utilisateur a été ajouté à vos relations.</p>
+</div>
+<!-- Afficher un message d'erreur si échec -->
+<div th:if="${param.error}">
+    <p style="color: red;">Cet utilisateur n'existe pas.</p>
 </div>
 
 </body>

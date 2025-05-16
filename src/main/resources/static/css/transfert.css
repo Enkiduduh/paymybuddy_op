@@ -70,14 +70,14 @@ width: 50%;
 
 .transactions-section {
     width: 88vw;
+    height: 40vh;
     display: flex;
-
     flex-direction: column;
-
     border:1px solid lightgrey;
     border-radius: 8px;
     margin: 0 10px;
     padding: 10px 20px;
+    overflow: scroll;
 }
 
 .transactions-title-container {
