@@ -2,9 +2,9 @@ package com.project.PayMyBuddy.controller;
 
 import com.project.PayMyBuddy.model.User;
 import com.project.PayMyBuddy.service.RelationService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +32,6 @@ public class RelationController {
     }
 
     @PostMapping("/relation")
-    @Transactional
     public String addRelation(
             @RequestParam String email,
             Authentication auth
@@ -41,7 +40,7 @@ public class RelationController {
             User from = (User) auth.getPrincipal();
             relationService.addRelation(from.getId(), email);
             return "redirect:/relation?success";
-        } catch (UsernameNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return "redirect:/relation?error";
         }
     }

@@ -17,12 +17,13 @@
     </div>
     <button id="btn-validate">Ajouter</button>
 </form>
+
 <!-- Afficher un message de succès si réussite -->
-<div th:if="${param.success}">
+<div th:if="${param.success}" class="message">
     <p style="color: green;">L'utilisateur a été ajouté à vos relations.</p>
 </div>
 <!-- Afficher un message d'erreur si échec -->
-<div th:if="${param.error}">
+<div th:if="${param.error}" class="message">
     <p style="color: red;">Cet utilisateur n'existe pas.</p>
 </div>
 
