@@ -1,6 +1,7 @@
 package com.project.PayMyBuddy.controller;
 
 
+import com.project.PayMyBuddy.repository.UserRepository;
 import com.project.PayMyBuddy.service.ProfilService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.ui.Model;
@@ -14,17 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProfilController {
     private final ProfilService profilService;
+    private final UserRepository userRepository;
 
-    public ProfilController(ProfilService profilService) {
+    public ProfilController(ProfilService profilService, UserRepository userRepository) {
         this.profilService = profilService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/profil")
     public String afficherProfil(Authentication auth, Model model) {
 
-        // Récupère l’utilisateur stocké dans le SecurityContext
-        User currentUser = (User) auth.getPrincipal();
-        model.addAttribute("user", currentUser);
+        //1. on récupère juste l'ID du principal stocké dans le SecurityContext
+        User principal = (User) auth.getPrincipal();
+        Long userId = principal.getId();
+
+        //2. Récupération à jour de l'utilisation depuis la BDD
+        User fresh = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+        model.addAttribute("user", fresh);
         return "profil"; // correspond à templates/profil.html
     }
 
@@ -32,7 +40,7 @@ public class ProfilController {
     public String modifyProfil(
             @RequestParam(required = false) String newUsername,
             @RequestParam(required = false) String newEmail,
-            @RequestParam(required = false)String newPassword,
+            @RequestParam(required = false) String newPassword,
             Authentication auth) {
         try {
             User from = (User) auth.getPrincipal();

@@ -11,15 +11,15 @@
 
     <div class="form-row">
         <div class="title-row">Username</div>
-        <input type="text" th:value="${user.username}" name="username" class="input-profil">
+        <input type="text" th:value="${user.username}" name="newUsername" class="input-profil" required>
     </div>
     <div class="form-row">
         <div class="title-row">Mail</div>
-        <input type="email" th:value="${user.email}" name="email" class="input-profil">
+        <input type="email" th:value="${user.email}" name="newEmail" class="input-profil" required>
     </div>
     <div class="form-row">
         <div class="title-row">Mot de passe</div>
-        <input type="password" th:value="${user.password}" placeholder="••••••••" name="password" class="input-profil">
+        <input type="password" placeholder="••••••••" name="newPassword" class="input-profil">
     </div>
 
     <button class="btn-validate" type="submit">Modifier</button>
