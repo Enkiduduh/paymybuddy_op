@@ -145,7 +145,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                        -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.8.11/org.jacoco.agent-0.8.11-runtime.jar=destfile=${project.build.directory}/jacoco.exec
+<!--                        -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/0.8.11/org.jacoco.agent-0.8.11-runtime.jar=destfile=${project.build.directory}/jacoco.exec-->
                     </argLine>
                 </configuration>
             </plugin>
@@ -162,15 +162,15 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>verify</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
                     <execution>
                         <configuration>
-                            <dataFile>${project.build.directory}/jacoco.exec</dataFile>
-                            <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+<!--                            <dataFile>${project.build.directory}/jacoco.exec</dataFile>-->
+<!--                            <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>-->
                             <rules>
                                 <rule>
                                     <archive>
