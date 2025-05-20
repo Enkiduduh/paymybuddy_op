@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProfilController {
     private final ProfilService profilService;
-    private final UserRepository userRepository;
 
-    public ProfilController(ProfilService profilService, UserRepository userRepository) {
+    public ProfilController(ProfilService profilService) {
         this.profilService = profilService;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/profil")
@@ -30,9 +28,8 @@ public class ProfilController {
         Long userId = principal.getId();
 
         //2. Récupération à jour de l'utilisation depuis la BDD
-        User fresh = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        model.addAttribute("user", fresh);
+        User user = profilService.getProfileById(userId);
+        model.addAttribute("user", user);
         return "profil"; // correspond à templates/profil.html
     }
 

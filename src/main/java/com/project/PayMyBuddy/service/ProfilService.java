@@ -18,6 +18,15 @@ public class ProfilService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Récupère l’utilisateur pour l’afficher dans le profil.
+     * Lève EntityNotFoundException si pas trouvé.
+     */
+    public User getProfileById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
     public void modifyProfil(
             Long id,
             String newUsername,
