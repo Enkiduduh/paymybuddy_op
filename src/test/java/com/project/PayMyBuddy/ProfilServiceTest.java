@@ -1,11 +1,8 @@
 package com.project.PayMyBuddy;
 
-
-import com.project.PayMyBuddy.controller.ProfilController;
 import com.project.PayMyBuddy.model.User;
 import com.project.PayMyBuddy.repository.UserRepository;
 import com.project.PayMyBuddy.service.ProfilService;
-import com.project.PayMyBuddy.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,78 +10,78 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
-public class ProfilServiceTest {
+@MockitoSettings(strictness = Strictness.LENIENT)
+class ProfilServiceTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private ProfilService profilService;
-
-    @MockBean
+    @Mock
     private UserRepository userRepository;
 
-    @MockBean
+    @Mock
     private PasswordEncoder passwordEncoder;
 
-    @MockBean
-    private UserService userService;
+    @InjectMocks
+    private ProfilService profilService;
 
-    private com.project.PayMyBuddy.model.User newUser;
+    private User existing;
 
     @BeforeEach
     void setup() {
-        newUser = new com.project.PayMyBuddy.model.User();
-        newUser.setId(42L);
-        newUser.setUsername("joe");
-        newUser.setEmail("joe@joe.fr");
-        newUser.setPassword("joe");
+        existing = new User();
+        existing.setId(42L);
+        existing.setUsername("oldUser");
+        existing.setEmail("old@domain.com");
+        existing.setPassword("encodedOld");
 
-        when(profilService.getProfileById(42L))
-                .thenReturn(newUser);
+        given(userRepository.findById(42L))
+                .willReturn(Optional.of(existing));
     }
 
     @Test
-    void modifyProfil() {
+    void modifyProfil_updatesOnlyNonNullFieldsAndEncodesPassword() {
         // GIVEN
-        //1. On charge l'utilisateur via son id
-        User user = profilService.getProfileById(42L);
+        String newUsername = "newUser";
+        String newEmail    = "new@domain.com";
+        String rawPassword = "plainPass";
+        String encodedPass = "encodedPass";
 
-
-        //2. On modifie l'username
-        user.setUsername("jack");
-        user.setEmail("jack@jack.fr");
+        given(passwordEncoder.encode(rawPassword)).willReturn(encodedPass);
 
         // WHEN
-        //3. On sauvegarde la modification
-        userRepository.save(user);
+        profilService.modifyProfil(42L, newUsername, newEmail, rawPassword);
 
         // THEN
-        //3. On vérifie si la modification a bien été sauvegardée
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
         verify(userRepository).save(captor.capture());
         User saved = captor.getValue();
-        assertEquals("jack", saved.getUsername());
-        assertEquals("jack@jack.fr", saved.getEmail());
+
+        assertThat(saved.getId()).isEqualTo(42L);
+        assertThat(saved.getUsername()).isEqualTo(newUsername);
+        assertThat(saved.getEmail()).isEqualTo(newEmail);
+        assertThat(saved.getPassword()).isEqualTo(encodedPass);
     }
 
+    @Test
+    void modifyProfil_whenUserNotFound_throwsException() {
+        // GIVEN
+        given(userRepository.findById(99L))
+                .willReturn(Optional.empty());
+
+        // THEN
+        assertThrows(EntityNotFoundException.class, () ->
+                profilService.modifyProfil(99L, "x", "x@x", "x")
+        );
+    }
 }

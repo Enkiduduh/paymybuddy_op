@@ -35,7 +35,7 @@ public class TransfertService {
     }
 
     @Transactional
-    public void executeTransfert(
+    public Transaction executeTransfert(
             Long senderId,
             Long receiverId,
             String description,
@@ -57,5 +57,6 @@ public class TransfertService {
 
         //3. Sauvegarder l'objet trans crée
         transactionRepository.save(trans);
+        return trans;
     }
 }
