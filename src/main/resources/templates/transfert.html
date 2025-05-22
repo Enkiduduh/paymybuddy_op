@@ -7,12 +7,9 @@
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu}"></div>
-
-
 <form th:action="@{/transfert}" method="post" class="form-section">
     <!-- on peut garder user.id en hidden si besoin -->
     <input type="hidden" name="userId" th:value="${user.id}"/>
-
     <select name="connectionId" class="input">
         <option value="" disabled selected>– Sélectionner une relation –</option>
         <option th:each="uc : ${relations}"
@@ -25,7 +22,6 @@
            min="0" max="1000" step="1" value="0" class="input"/>
     <button id="btn-validate" type="submit">Payer</button>
 </form>
-
 <div class="transactions-section">
     <div class="transactions-title-head">Mes Transations</div>
     <div class="transactions-title-container">
@@ -36,9 +32,8 @@
     <div th:each="trans : ${transactions}" class="transactions-rows-container">
         <div th:text="${trans.receiver.username}" class="transactions-row-head"></div>
         <div th:text="${trans.description}" class="transactions-row-head"></div>
-        <div th:text="${trans.amount}" class="transactions-row-right">€</div>
+        <div th:text="${T(java.lang.String).format('%.2f', trans.amount)} + ' €'" class="transactions-row-right">€</div>
     </div>
 </div>
-
 </body>
 </html>

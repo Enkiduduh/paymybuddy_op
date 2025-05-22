@@ -36,7 +36,6 @@ public class SecurityConfig {
         http
                 .authenticationProvider(authProvider)
 
-                // 1. Politique de création de session
                 .sessionManagement(session -> session
                         // Spring ne créera une session que si nécessaire
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -46,18 +45,17 @@ public class SecurityConfig {
                 )
 
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/connexion","/inscription","/css/**").permitAll() // accessible sans connexion
-                        .anyRequest().authenticated() // tout le reste nécessite d'être connecté
+                        .requestMatchers("/connexion","/inscription","/css/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/connexion")                    // GET pour afficher le formulaire
+                        .loginPage("/connexion")
                         .loginProcessingUrl("/connexion")  // POST pour traiter la soumission
                         .defaultSuccessUrl("/transfert", true)
                         .failureUrl("/connexion?error")
                         .permitAll()
                 )
                 .logout(logout -> logout
-//                        .logoutUrl("/logout")
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout","GET"))
                         .logoutSuccessUrl("/connexion?logout")
                         .permitAll()
