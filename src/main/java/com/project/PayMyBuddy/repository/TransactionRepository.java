@@ -14,8 +14,4 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
      */
     List<Transaction> findBySenderId(@Param("senderId") Long senderId);
 
-    /**
-     * Execute la transaction d'un userId vers un connectionId avec amount et description.
-     */
-
 }

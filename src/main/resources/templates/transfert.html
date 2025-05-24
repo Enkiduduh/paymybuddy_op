@@ -10,8 +10,8 @@
 <form th:action="@{/transfert}" method="post" class="form-section">
     <!-- on peut garder user.id en hidden si besoin -->
     <input type="hidden" name="userId" th:value="${user.id}"/>
-    <select name="connectionId" class="input">
-        <option value="" disabled selected>– Sélectionner une relation –</option>
+    <select name="connectionId" class="input input-relation">
+        <option value="" disabled selected>Sélectionner une relation</option>
         <option th:each="uc : ${relations}"
                 th:value="${uc.connection.id}"
                 th:text="${uc.connection.username}">

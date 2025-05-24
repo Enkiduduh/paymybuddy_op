@@ -23,19 +23,21 @@ body {
 }
 
 .btn-validate {
-    background: blue;
+    background: rgb(32, 127, 238);
     color: white;
     margin: 60px 0px 20px 0px;
+    border: none;
 }
 
 .btn-connexion {
-    background: blue;
+    background: rgb(32, 127, 238);
     color: white;
     margin: 10px 0px 10px 0px;
+    border: none;
 }
 
 .btn-buddy {
-    background: goldenrod;
+    background: rgb(246, 159, 29);
     color: white;
     margin: 20px 0px 60px 0px;
 }

@@ -19,16 +19,30 @@ body {
     position: fixed;
     top:0;
 }
+#nav-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+ }
 .link-logo {
-    width: 50%;
+width: 50%;
 }
 
 .links-container {
-    width: 50%;
+    width: 100%;
     display:flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
+    list-style-type: none;
 }
+.links-container a {
+    text-decoration: none;
+}
+
+.links {
+    margin: 0 10px;
+}
+
 
 .form-section {
     width: 50%;
@@ -73,23 +87,4 @@ body {
     top: 60%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-}
-#nav-section {
-    width: 100%;
-    display: flex;
-    align-items: center;
- }
-.link-logo {
-width: 50%;
-}
-
-.links-container {
-    width: 100%;
-    display:flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style-type: none;
-}
-.links-container a {
-    text-decoration: none;
 }

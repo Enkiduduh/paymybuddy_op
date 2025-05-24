@@ -31,12 +31,16 @@ width: 50%;
 .links-container {
     width: 100%;
     display:flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     list-style-type: none;
 }
 .links-container a {
     text-decoration: none;
+}
+
+.links {
+    margin: 0 10px;
 }
 
 .form-section {
@@ -64,9 +68,30 @@ width: 50%;
 
 .input {
     width: 25%;
-    padding: 10px 20px;
+
 }
 
+.input-relation {
+    background: white;
+    border-radius: 3px;
+    border: 1px solid #c9c9c9;
+    padding: 10px 20px;
+     width: 30%;
+}
+
+.input-description {
+   border: 1px solid #c9c9c9;
+   padding: 10px 20px;
+    width: 30%;
+     border-radius: 3px;
+}
+
+#quantity {
+   border: 1px solid #c9c9c9;
+   padding: 20px 10px;
+    width: 15%;
+     border-radius: 3px;
+}
 
 .transactions-section {
     width: 88vw;
@@ -101,10 +126,10 @@ width: 50%;
 .transactions-rows-container {
     width: 100%;
     margin: 10px 0;
-    padding-bottom: 5px;
+    padding-top: 8px;
     display: flex;
     justify-content: space-between;
-     border-bottom: 1px solid lightgrey;
+     border-top: 1px solid lightgrey;
  }
 
  .transactions-row-head {

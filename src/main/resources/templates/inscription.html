@@ -7,10 +7,10 @@
 </head>
 <body>
 <form th:action="@{/inscription}" method="post" class="main-container">
-    <button class="button btn-buddy" >Pay My Buddy</button>
-    <input type="text" name="username" placeholder="username" required class="input-inscription" />
-    <input type="email" name="email" placeholder="email" required  class="input-inscription"/>
-    <input type="password" name="password" placeholder="mot de passe" required class="input-inscription" />
+    <div class="button btn-buddy" >Pay My Buddy</div>
+    <input type="text" name="username" placeholder="Username" required class="input-inscription" />
+    <input type="email" name="email" placeholder="Mail" required  class="input-inscription"/>
+    <input type="password" name="password" placeholder="Mot de passe" required class="input-inscription" />
     <button class="button btn-validate" type="submit" >S'inscrire</button>
     <div th:if="${param.error}">Email ou mot de passe invalide</div>
 
